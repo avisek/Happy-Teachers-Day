@@ -8,13 +8,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
 
 		<style>
+@import url('https://fonts.googleapis.com/css?family=ABeeZee&display=swap');
 :root {
-	--color: hsl(0, 100%, 50%);
+	--hue: 0;
 }
 body {
 	background-color: #000; /* #2b2b2b */
 	color: #fff;
-	font-family: Verdana;
 	margin: 0;
 	overflow: hidden;
 }
@@ -29,21 +29,27 @@ canvas {
 #typewriter {
 	position: absolute;
 	left: 0;
-	bottom: 0;
+	top: 0;
 	right: 0;
-	color: #fff;
+	color: hsl(var(--hue), 100%, 100%);
 	padding: 2vmin;
-	font-size: 4vmin;
+	font-family: 'ABeeZee', sans-serif;
+	font-size: 4.5vmin;
 	text-align: left;
-	text-shadow: 0 0 2px var(--color),
-	             0 0 4px  var(--color);
+	text-shadow: 0 0 8px  hsl(var(--hue), 100%, 50%);
 	pointer-events: none;
-	animation: neon 3s ease-in-out 0s infinite alternate;
+	transform: translateY(0px);
+	transition: transform .5s ease-out;
+	animation: neon 3s ease-in-out 0s infinite alternate, color 8s ease-in-out 0s infinite alternate;
 }
 @keyframes neon {
 	to {
-		text-shadow: 0 0 4px #fff,
-		             0 0 8px  var(--color);
+		text-shadow: 0 0 8px  hsl(var(--hue), 100%, 90%);
+	}
+}
+@keyframes color {
+	to {
+		color: hsl(var(--hue), 100%, 85%);
 	}
 }
 		</style>
@@ -80,16 +86,16 @@ var c = document.getElementById('canvas'),
 
 	opts = {
 		strings: ['HAPPY', 'TEACHERS', 'DAY'],
-		charSize: 30 * d,
-		charSpacing: 35 * d,
-		lineHeight: 40 * d,
+		charSize: 35 * d,
+		charSpacing: 40 * d,
+		lineHeight: 48 * d,
 
 		cx: w / 2,
 		cy: h / 2,
 
 		fireworkPrevPoints: 10,
-		fireworkBaseLineWidth: 5 * d,
-		fireworkAddedLineWidth: 8 * d,
+		fireworkBaseLineWidth: 2 * d,
+		fireworkAddedLineWidth: 4 * d,
 		fireworkSpawnTime: 200,
 		fireworkBaseReachTime: 30,
 		fireworkAddedReachTime: 30,
@@ -185,7 +191,7 @@ var initParticles = function() {
 	// Set off some initial particles.
 	var i, x, y;
 
-	for (i = 0; i < 20; i++) {
+	for (i = 0; i < 100; i++) {
 		x = (w * 0.5) + random(-100, 100);
 		y = (h * 0.5) + random(-100, 100);
 		spawnParticles(x, y);
@@ -574,7 +580,7 @@ function anim() {
 
 	window.requestAnimationFrame(anim);
 
-	ctx.fillStyle = '#111';
+	ctx.fillStyle = '#000';
 	ctx.fillRect(0, 0, w, h);
 
 	stepParticles();
@@ -650,8 +656,11 @@ var quote = quotes[0];
 var b = 0;
 var c = 0;
 
+tw.style.transform = 'translateY(' + (window.innerHeight - 200) + 'px)';
+
 var tick = function() {
 	tw.innerHTML = quote.substring(0, c);
+	tw.style.transform = 'translateY(' + (window.innerHeight - tw.offsetHeight) + 'px)';
 	c++;
 	if (c < quote.length) {
 		setTimeout(tick, 50);
@@ -669,7 +678,7 @@ setTimeout(tick, 10000);
 var hue = 0;
 
 setInterval(function() {
-	document.documentElement.style.setProperty('--color', 'hsl(' + hue + ', 100%, 25%)');
+	document.documentElement.style.setProperty('--hue', hue);
 	hue += 1;
 	hue = hue % 360;
 }, 100);
