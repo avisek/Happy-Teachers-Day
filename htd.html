@@ -1,0 +1,121 @@
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css"> 
+#myDIV {
+    margin: auto;
+    border: 10px dotted black;
+    width: 300px;
+    height: 300px;
+    background-color: #0000CD;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    font-family: courier;
+    border-radius: 310px;
+    -webkit-animation: mymove 3s infinite linear; 
+    
+/* Chrome, Safari*/
+    animation: mymove 3s infinite linear;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes mymove {
+    25% {-webkit-transform: rotate(30deg);}
+    50% {background-color: #fff; color: #000;}
+    75% {-webkit-transform: rotate(-30deg);}
+}
+
+/* Standard syntax */
+@keyframes mymove {
+    25% {-webkit-transform: rotate(30deg);}
+    50% {background-color: #fff; color: #000;}
+    75% {-webkit-transform: rotate(-30deg);}
+}
+
+#typewriter {
+	padding: 10px;
+	font-size: 15px;
+	text-align: center;
+-webkit-animation: color-change 20s infinite;
+   -moz-animation: color-change 20s infinite;
+     -o-animation: color-change 20s infinite;
+    -ms-animation: color-change 20s infinite;
+        animation: color-change 20s infinite;
+}	
+
+</style>
+</head>
+<body>
+	<div id="myDIV">
+  <h1>Happy
+   </br>
+   Teachers'
+   </br>
+   Day
+   </h1>
+</div>
+ <div id="typewriter"></div>
+ 
+ 
+ 
+ 
+<script type="text/javascript">
+(function() {
+
+	// Error Tracking
+	window.onerror = function(errorMsg, url, lineNumber) {
+		alert("JavaScript Error!\n\nMassage: " + errorMsg + "\nURL: " + url + "\nLine: " + lineNumber + "\n");
+	};
+
+})();
+
+var tw = document.getElementById("typewriter");
+var quotes = [
+"Hello, sir! How are you? ",
+"Well! Hope You're fine. ",
+"This composition has been made by some of your students. ",
+"Somehow this journey almost comes to end. ",
+"So, it's a very touching moment for all of us. ",
+"But, we're not such normal guys, you know that. ",
+"As we're special so we love to make everything special more. ",
+"We made this so that it will remind you of us. ",
+"We are ",
+"Anirban ",
+"Arindam ",
+"Priya ",
+"Partha ",
+"Pijush ",
+"Sadrisha ",
+"Kiran ",
+"Rahul ",
+"Santu ",
+"Surya ",
+"...and, ",
+"SrSourav... ",
+"Thank you...Take care! ",
+];
+var quote = quotes[0];
+var b = 0;
+var c = 0;
+
+var tick = function() {
+	tw.innerHTML = quote.substring(0, c);
+	c++;
+	if (c < quote.length) {
+		setTimeout(tick, 50);
+	} else {
+		c = 0;
+		b++;
+		if (b >= quotes.length) b = 0;
+		quote = quotes[b];
+		setTimeout(tick, 3000);
+	}
+};
+
+tick();
+
+</script>
+</body>
+</html>
